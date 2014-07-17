@@ -1,21 +1,18 @@
 require_relative '../moviecode.rb'
 
-
-describe "If the query has an Image" do 
-	
-	it "It is shown" do
-		
-
-		imdb_api = double("imdb_api")
-		imdb_api.stub(:new).and_return([])
-
-		results = MovieSearcher.new(imdb_api).search('hodor')
-		#expect(results.first.poster).not_to eq(nil)
-
-		#expect(results).to eq(13)
-		expect(extract_with_posters()).to eq ([])
-
+describe "the poster retrieval" do
+	before :each do
+		@movie_info = double("the movie database")   
+				#makes fake
+		@poster_retriever = PosterRetriever.new(@movie_db) 
+				#makes a Class instance w the fake
 	end
 
 
+	it "must retrieve one poster if we only have one poster" do
+		@movie_db.stub(:posters).and_return(["www.url.com"]) 
+				#movie_db.posters --is to be--> ["www.url.com"]
+		expect(@poster_retriever.get_posters("query")).to eq(["www.url.com"])
+				#The Class has to have a method that returns...
+	end
 end

@@ -24,13 +24,10 @@ end
 
 
 get '/' do
-	
 	erb :search
-
 end
 
 post '/query' do
-
 	@query = params[:searchit]
 	redirect to("/game?new=#{@query}")
 end
@@ -41,18 +38,20 @@ get '/game' do
 	@posters = search.movies.first(20).map { |each| each.poster}
 	@imgposters = @posters.compact.first(6)
 	erb :movie
-
 end
 
 
+class PosterRetriever
+
+	def initialize(@movie_info)#the real stuff will eventually fit here!
+		@movie_info = movie_db
+	end
+
+	def get_posters(query)
+		@movie_info.posters(query).compact.take(9)
+		#transform the fake stuff to what I want
+	end
 
 
 
-=begin
-def intAdd(string)
-string.gsub!('/n',"")
- string.length > 1 ? 
-string.split(",").map{|num| num.to_i}.inject(0){|a,b| a+b}
-: string.to_i
 end
-=end
