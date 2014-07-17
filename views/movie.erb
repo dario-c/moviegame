@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title>Movie Game</title>
+</head>
+<body>
+
+<%  @imgposters %>
+<%= @query %>
+
+
+
+
+<% @imgposters.each do |url| %>
+
+<img width='300px' height='300px' src='<%=url%>'/>
+<% end    %>
+
+</body>
+</html>
